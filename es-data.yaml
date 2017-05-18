@@ -63,6 +63,8 @@ spec:
           value: "false"
         - name: "ES_JAVA_OPTS"
           value: "-Xms1500m -Xmx1500m"
+        - name: ES_PLUGINS_INSTALL
+          value: "repository-s3"
         ports:
         - containerPort: 9300
           name: transport

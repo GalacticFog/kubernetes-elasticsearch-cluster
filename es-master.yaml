@@ -6,7 +6,12 @@ metadata:
     component: elasticsearch
     role: master
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -58,6 +63,8 @@ spec:
           value: "false"
         - name: "ES_JAVA_OPTS"
           value: "-Xms256m -Xmx256m"
+        - name: ES_PLUGINS_INSTALL
+          value: "repository-s3"
         ports:
         - containerPort: 9300
           name: transport

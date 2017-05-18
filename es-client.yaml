@@ -7,6 +7,11 @@ metadata:
     role: client
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -60,6 +65,8 @@ spec:
           value: "-Xms1500m -Xmx1500m"
         - name: NETWORK_HOST
           value: "0.0.0.0"
+        - name: ES_PLUGINS_INSTALL
+          value: "repository-s3"
         ports:
         - containerPort: 9200
           name: http
